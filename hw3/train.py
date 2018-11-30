@@ -47,19 +47,19 @@ train_Y = to_categorical(train_Y, num_classes)
 
 model = Sequential()
 
-model.add(Conv2D(128, (3, 3), padding='same', input_shape=input_shape))
+model.add(Conv2D(32, (3, 3), padding='same', input_shape=input_shape))
 model.add(LeakyReLU(alpha=0.03))
 model.add(BatchNormalization())
 model.add(AveragePooling2D(pool_size=(2, 2), padding='same'))
-model.add(Dropout(0.25))
+model.add(Dropout(0.1))
 
-model.add(Conv2D(128, (3, 3), padding='same', input_shape=input_shape))
+model.add(Conv2D(64, (3, 3), padding='same', input_shape=input_shape))
 model.add(LeakyReLU(alpha=0.03))
 model.add(BatchNormalization())
 model.add(AveragePooling2D(pool_size=(2, 2), padding='same'))
-model.add(Dropout(0.25))
+model.add(Dropout(0.2))
 
-model.add(Conv2D(256, (3, 3), padding='same'))
+model.add(Conv2D(128, (3, 3), padding='same'))
 model.add(LeakyReLU(alpha=0.03))
 model.add(BatchNormalization())
 model.add(AveragePooling2D(pool_size=(2, 2), padding='same'))
@@ -90,12 +90,10 @@ model.add(Activation('softmax'))
 
 model.summary()
 
-# Model Compiling
 model.compile(loss      = keras.losses.categorical_crossentropy,
               optimizer = keras.optimizers.Adadelta(),
               metrics   = ['accuracy'])
               
-# Image PreProcessing
 train_gen = ImageDataGenerator(rotation_range    = 30,
                                width_shift_range  = 0.2,
                                height_shift_range = 0.2,
@@ -104,7 +102,6 @@ train_gen = ImageDataGenerator(rotation_range    = 30,
                                horizontal_flip    = True)
 train_gen.fit(train_X)
 
-# Callbacks
 callbacks = []
 modelcheckpoint = ModelCheckpoint('weights.{epoch:03d}-{val_acc:.5f}.h5', monitor='val_acc', save_best_only=True)
 callbacks.append(modelcheckpoint)
