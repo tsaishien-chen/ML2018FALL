@@ -17,4 +17,4 @@ Execution:
     bash test.sh [directory of sample_submission.csv]
 
 Result:
-    The result .csv file will appear in the submit folder
+    The result .csv file will appear in the 'src/Pytorch/submit' folder
