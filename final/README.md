@@ -15,3 +15,6 @@ Test Data (蛋白質圖片) 須放在test資料夾內
 
 Execution:
     bash test.sh [directory of sample_submission.csv]
+
+Result:
+    The result .csv file will appear in the submit folder
